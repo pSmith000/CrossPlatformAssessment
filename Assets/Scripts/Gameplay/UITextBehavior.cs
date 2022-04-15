@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class UITextBehavior : MonoBehaviour
 {
-    private MeshRenderer _meshRenderer;
-
+    //Gets all of the text UI elements and a tracker from the inspector
     [SerializeField]
     private Text _powerText;
     [SerializeField]
@@ -15,15 +14,11 @@ public class UITextBehavior : MonoBehaviour
     private Text _score;
     [SerializeField]
     private ControllControllerBehavior _tracker;
-    float score;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
     {
+        //Sets the text to say what values the tracker has
         _powerText.text = "Power: " + _tracker.PowerTracker;
         _rotateText.text = "Rotation: " + _tracker.RotationTracker;
         _score.text = "Score: " + _tracker.ScoreTracker;
