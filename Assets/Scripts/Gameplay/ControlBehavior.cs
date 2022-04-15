@@ -63,4 +63,12 @@ public class ControlBehavior : MonoBehaviour
         _cannonAngle.rotation = Quaternion.Euler(-23, 0, _xRotation);
         _tracker.RotationTracker--;
     }
+
+    /// <summary>
+    /// End the application
+    /// </summary>
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
