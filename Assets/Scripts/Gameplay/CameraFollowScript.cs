@@ -6,62 +6,45 @@ using System;
 
 public class CameraFollowScript : MonoBehaviour
 {
+    //Serializes all the variables needed for the camera to follow the bullet when it is fired
     private Camera _camera;
     [SerializeField]
     private BulletShooterBehavior _bullet;
     private BulletBehavior _bulletToFollow;
     [SerializeField]
-    private Vector2 _referenceAspectRatio;
-    private Vector3 _basePosition;
-    private float _refRatio;
-    [SerializeField]
-    private Vector3 _zoomScale = Vector3.one;
-    [SerializeField]
     private Canvas _canvas;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Gets the camera and bullet from reference
         _camera = GetComponent<Camera>();
         _bulletToFollow = _bullet.getBullet();
-        _camera = GetComponent<Camera>();
-        _refRatio = _referenceAspectRatio.x / _referenceAspectRatio.y;
-        _basePosition = transform.position;
-    }
-
-    private void ScalePosition()
-    {
-        if (_referenceAspectRatio.x <= 0 || _referenceAspectRatio.y <= 0)
-            return;
-
-        double ratio = _refRatio / _camera.aspect;
-        ratio = Math.Round(ratio, 4);
-
-        Vector3 scalePosition = Vector3.Scale(_basePosition * (float)ratio, _zoomScale);
-
-        transform.position = scalePosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        //if there is no bullet
         if (_bulletToFollow == null)
         {
-            _zoomScale = Vector3.one;
+            //set the camera back to its original position and rotation
             transform.position = new Vector3(5, 28, 71);
             transform.rotation = Quaternion.Euler(new Vector3(19, -180, 0));
             _bulletToFollow = _bullet.getBullet();
+            //Enables the ui elements
             _canvas.enabled = true;
         }
+        //If there is a bullet
         else
         {
+            //Sets a new position above the bullet and follows it until it is destroyed
             Vector3 newPosition = _bulletToFollow.transform.position;
             newPosition.y += 20;
             transform.position = newPosition;
             transform.rotation = Quaternion.Euler(new Vector3(80, -180, 0));
-
+            //Disables the ui elements
             _canvas.enabled = false;
         }
-        //ScalePosition();
     }
 }

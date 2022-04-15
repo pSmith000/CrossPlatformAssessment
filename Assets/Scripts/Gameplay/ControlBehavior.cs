@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ControlBehavior : MonoBehaviour
 {
+    //Initializes the variables needed for controling the buttons
     [SerializeField]
     private BulletShooterBehavior _bullet;
     [SerializeField]
@@ -11,11 +12,11 @@ public class ControlBehavior : MonoBehaviour
     [SerializeField]
     private ControllControllerBehavior _tracker;
     private float _xRotation = 1;
-    private Vector3 _rotation;
-    [SerializeField]
-    private BulletBehavior bullet;
     public static float Score;
 
+    /// <summary>
+    /// Sets all of the tracker values to 0
+    /// </summary>
     private void Start()
     {
         _tracker.PowerTracker = 0;
@@ -23,6 +24,9 @@ public class ControlBehavior : MonoBehaviour
         _tracker.ScoreTracker = 0;
     }
 
+    /// <summary>
+    /// Sets 
+    /// </summary>
     private void Update()
     {
         _tracker.ScoreTracker = Score;
